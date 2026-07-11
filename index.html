@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="vi" class="intro-locked">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#7b2948" />
+    <meta name="description" content="Một món quà sinh nhật nhỏ, được viết bằng những kỷ niệm của chúng mình." />
+    <title>Món quà sinh nhật dành cho em</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23c44b73' d='M8 14S1.5 10.4 1.5 5.8A3.3 3.3 0 0 1 7.2 3.5L8 4.4l.8-.9a3.3 3.3 0 0 1 5.7 2.3C14.5 10.4 8 14 8 14z'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="intro-locked">
+    <a class="skip-link" href="#noi-dung">Đi thẳng đến nội dung chính</a>
+
+    <div class="opening" id="mo-dau" role="dialog" aria-modal="true" aria-labelledby="loi-chao-mo-dau">
+      <div class="opening-stars" aria-hidden="true"></div>
+      <div class="envelope-wrap">
+        <button class="envelope" id="phong-thu-mo-dau" type="button" aria-expanded="false">
+          <span class="envelope-back"></span>
+          <span class="opening-note" aria-hidden="true">
+            <span class="note-date" id="ngay-sinh-nhat"></span>
+            <strong id="loi-chao-mo-dau"></strong>
+            <span id="loi-nhan-mo-dau"></span>
+          </span>
+          <span class="envelope-front"></span>
+          <span class="envelope-flap"></span>
+          <span class="envelope-seal" aria-hidden="true">♥</span>
+        </button>
+        <p class="opening-hint" id="goi-y-mo-thu">Chạm hoặc vuốt lên để mở phong thư</p>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Điều hướng chính">
+      <a href="#thuoc-phim">Kỷ niệm</a>
+      <a href="#la-thu">Lá thư</a>
+      <a href="#banh-kem">Bánh kem</a>
+      <a href="#loi-chuc">Lời nhắn</a>
+    </nav>
+
+    <main id="noi-dung">
+      <header class="hero" id="dau-trang">
+        <div class="hero-copy reveal">
+          <p class="eyebrow" id="hero-eyebrow"></p>
+          <h1 id="hero-title"></h1>
+          <p class="hero-message" id="hero-message"></p>
+          <a class="button" href="#thuoc-phim">Đi cùng anh nhé! <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero-photo-wrap reveal" id="anh-chinh-wrap">
+          <div class="hero-photo-shadow" aria-hidden="true"></div>
+          <figure class="hero-photo" id="anh-chinh">
+            <img id="hero-image" src="" alt="" />
+            <figcaption id="hero-caption"></figcaption>
+            <span class="photo-tape" aria-hidden="true"></span>
+          </figure>
+          <span class="orbit orbit-one" aria-hidden="true">✦</span>
+          <span class="orbit orbit-two" aria-hidden="true">♥</span>
+        </div>
+      </header>
+
+      <section class="film-section" id="thuoc-phim" aria-labelledby="film-title">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Những ngày mình đã đi qua</p>
+          <h2 id="film-title">Thước phim của chúng mình</h2>
+          <p id="film-intro"></p>
+        </div>
+        <div class="film-sticky">
+          <div class="film-strip" id="film-strip" aria-live="polite">
+            <div class="sprockets sprockets-top" aria-hidden="true"></div>
+            <div class="film-stage" id="film-stage"></div>
+            <div class="sprockets sprockets-bottom" aria-hidden="true"></div>
+          </div>
+          <div class="film-meta">
+            <span id="film-frame">Khung hình 01</span>
+            <div class="film-progress" aria-hidden="true"><span id="film-progress-bar"></span></div>
+            <span id="film-date"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="scrapbook section" id="goc-ky-niem" aria-labelledby="scrapbook-title">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Góc nhỏ để dành</p>
+          <h2 id="scrapbook-title">Mấy điều anh chưa kịp nói</h2>
+        </div>
+        <div class="scrapbook-board reveal">
+          <button class="paper-note scrapbook-object" type="button" aria-expanded="false">
+            <span class="object-hint">Mở mảnh giấy gấp</span>
+            <span class="object-secret" id="paper-secret"></span>
+          </button>
+          <button class="ribbon scrapbook-object" type="button" aria-expanded="false">
+            <span class="ribbon-bow" aria-hidden="true"></span>
+            <span class="object-hint">Kéo nhẹ dải ruy băng</span>
+            <span class="object-secret" id="ribbon-secret"></span>
+          </button>
+          <button class="stamp scrapbook-object" type="button" aria-label="Chạm vào con dấu để nhận một trái tim">
+            <span aria-hidden="true">♥</span>
+          </button>
+          <button class="flower scrapbook-object" type="button" aria-expanded="false">
+            <span class="pressed-flower" aria-hidden="true">❀</span>
+            <span class="object-hint">Một bông hoa dành cho em</span>
+            <span class="object-secret" id="flower-secret"></span>
+          </button>
+          <div class="drag-photo" id="anh-keo-tha" tabindex="0" role="img" aria-label="Tấm ảnh có thể kéo và xoay nhẹ">
+            <img id="scrapbook-image" src="" alt="" />
+            <span>Giữ và kéo tấm ảnh này</span>
+          </div>
+          <button class="gift scrapbook-object" type="button" aria-expanded="false">
+            <span class="gift-lid" aria-hidden="true"></span>
+            <span class="gift-box" aria-hidden="true">♥</span>
+            <span class="object-hint">Có một điều nhỏ ở đây</span>
+            <span class="object-secret" id="gift-secret"></span>
+          </button>
+        </div>
+      </section>
+
+      <section class="letter-section section" id="la-thu" aria-labelledby="letter-section-title">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Gửi riêng em</p>
+          <h2 id="letter-section-title">Một lá thư chưa niêm phong</h2>
+        </div>
+        <button class="folded-letter reveal" id="folded-letter" type="button" aria-expanded="false">
+          <span class="letter-cover">
+            <span class="letter-heart" aria-hidden="true">♥</span>
+            <strong>Chạm để mở lá thư</strong>
+          </span>
+          <span class="letter-paper">
+            <span class="letter-greeting" id="letter-greeting"></span>
+            <span class="letter-content" id="letter-content"></span>
+            <span class="letter-signature" id="letter-signature"></span>
+            <small>Chạm lần nữa để gấp thư lại</small>
+          </span>
+        </button>
+      </section>
+
+      <section class="cake-section section" id="banh-kem" aria-labelledby="cake-title">
+        <canvas id="fireworks" aria-hidden="true"></canvas>
+        <div class="section-heading reveal">
+          <p class="eyebrow">Điều ước tuổi mới</p>
+          <h2 id="cake-title">Chiếc bánh dành riêng cho em</h2>
+        </div>
+        <div class="cake-area reveal" id="cake-area">
+          <button class="cake" id="cake" type="button" aria-describedby="cake-message">
+            <span class="cake-illustration" aria-hidden="true">
+              <span class="cake-shadow"></span>
+              <span class="cake-plate"></span>
+              <span class="cake-layer">
+                <span class="frosting">
+                  <span class="cake-top"></span>
+                  <span class="frosting-drips">
+                    <i class="frosting-drip"></i>
+                    <i class="frosting-drip"></i>
+                    <i class="frosting-drip"></i>
+                    <i class="frosting-drip"></i>
+                  </span>
+                </span>
+              </span>
+              <span class="candles">
+                <span class="candle"><i class="flame"></i><i class="smoke"></i></span>
+                <span class="candle"><i class="flame"></i><i class="smoke"></i></span>
+                <span class="candle"><i class="flame"></i><i class="smoke"></i></span>
+                <span class="candle"><i class="flame"></i><i class="smoke"></i></span>
+                <span class="candle"><i class="flame"></i><i class="smoke"></i></span>
+              </span>
+            </span>
+          </button>
+          <p class="cake-message" id="cake-message" aria-live="polite"></p>
+          <button class="mic-button" id="mic-button" type="button">Thổi nến bằng micro</button>
+          <p class="mic-status" id="mic-status" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section class="wishes section" id="loi-chuc" aria-labelledby="wishes-title">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Mở từng điều một</p>
+          <h2 id="wishes-title">Sáu lời nhắn anh giấu ở đây</h2>
+          <p id="wish-progress" aria-live="polite"></p>
+        </div>
+        <div class="wish-objects reveal" id="wish-objects"></div>
+        <p class="all-wishes" id="all-wishes" hidden></p>
+      </section>
+
+      <section class="quiz section" id="do-vui" aria-labelledby="quiz-title">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Chuyện nhỏ của hai đứa</p>
+          <h2 id="quiz-title">Em còn nhớ không?</h2>
+        </div>
+        <div class="quiz-card reveal" id="quiz-card">
+          <div class="quiz-start" id="quiz-start">
+            <p>Một câu đố ngắn về những kỷ niệm chỉ hai đứa mình hiểu.</p>
+            <button class="button" id="start-quiz" type="button">Bắt đầu nhé</button>
+          </div>
+          <div id="quiz-content" hidden>
+            <p class="quiz-count" id="quiz-count"></p>
+            <h3 id="quiz-question"></h3>
+            <div class="quiz-options" id="quiz-options"></div>
+            <p class="quiz-feedback" id="quiz-feedback" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="finale" id="ket-thuc" aria-labelledby="final-title">
+        <img id="final-image" src="" alt="" />
+        <div class="final-overlay"></div>
+        <div class="final-content reveal">
+          <p class="eyebrow">Và còn thật nhiều chương sau nữa</p>
+          <h2 id="final-title"></h2>
+          <p id="final-message"></p>
+          <div class="final-actions">
+            <a class="button button-light" href="#thuoc-phim">Xem lại thước phim của chúng mình</a>
+            <button class="button button-outline" id="final-gift-button" type="button" aria-expanded="false">Mở món quà cuối cùng</button>
+          </div>
+          <div class="final-gift" id="final-gift" hidden>
+            <span aria-hidden="true">♥</span>
+            <p id="final-gift-message"></p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="photo-viewer" id="photo-viewer">
+      <button class="viewer-close" id="viewer-close" type="button" aria-label="Đóng ảnh phóng to">Đóng</button>
+      <button class="viewer-arrow viewer-prev" id="viewer-prev" type="button" aria-label="Xem ảnh trước">‹</button>
+      <figure>
+        <img id="viewer-image" src="" alt="" />
+        <figcaption id="viewer-caption"></figcaption>
+      </figure>
+      <button class="viewer-arrow viewer-next" id="viewer-next" type="button" aria-label="Xem ảnh tiếp theo">›</button>
+    </dialog>
+
+    <div class="heart-layer" id="heart-layer" aria-hidden="true"></div>
+    <div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
