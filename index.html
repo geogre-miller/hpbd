@@ -167,7 +167,7 @@
             </span>
           </button>
           <p class="cake-message" id="cake-message" aria-live="polite"></p>
-          <button class="mic-button" id="mic-button" type="button">Thổi nến bằng micro</button>
+          <button class="mic-button" id="mic-button" type="button" hidden>Thổi nến bằng micro</button>
           <p class="mic-status" id="mic-status" aria-live="polite"></p>
         </div>
       </section>
@@ -209,7 +209,6 @@
           <h2 id="final-title"></h2>
           <p id="final-message"></p>
           <div class="final-actions">
-            <a class="button button-light" href="#thuoc-phim">Xem lại thước phim của chúng mình</a>
             <button class="button button-outline" id="final-gift-button" type="button" aria-expanded="false">Mở món quà cuối cùng</button>
           </div>
           <div class="final-gift" id="final-gift" hidden>
@@ -219,16 +218,6 @@
         </div>
       </section>
     </main>
-
-    <dialog class="photo-viewer" id="photo-viewer">
-      <button class="viewer-close" id="viewer-close" type="button" aria-label="Đóng ảnh phóng to">Đóng</button>
-      <button class="viewer-arrow viewer-prev" id="viewer-prev" type="button" aria-label="Xem ảnh trước">‹</button>
-      <figure>
-        <img id="viewer-image" src="" alt="" />
-        <figcaption id="viewer-caption"></figcaption>
-      </figure>
-      <button class="viewer-arrow viewer-next" id="viewer-next" type="button" aria-label="Xem ảnh tiếp theo">›</button>
-    </dialog>
 
     <div class="heart-layer" id="heart-layer" aria-hidden="true"></div>
     <div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>

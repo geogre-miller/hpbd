@@ -68,7 +68,7 @@ const birthdayData = {
   cakeMessages: {
     idle: "Chạm vào bánh kem để thắp nến",
     lit: "Chúc mừng sinh nhật em! Hôm nay là ngày dành riêng cho cô gái anh luôn muốn thấy mỉm cười.",
-    blownOut: "Nhắm mắt lại và ước một điều nhé…",
+    blownOut: "Tada, chúc cho điều ước của em sẽ thành hiện thực",
     relight: "Nến đã sáng trở lại. Mong điều em vừa ước sẽ sớm thành hiện thực.",
   },
   wishes: [
@@ -170,7 +170,6 @@ function renderContent() {
         <p class="eyebrow">Kỷ niệm ${String(index + 1).padStart(2, "0")}</p>
         <h3>${memory.title}</h3>
         <p>${memory.caption}</p>
-        <button class="viewer-open mic-button" type="button" data-index="${index}">Phóng to ảnh</button>
       </div>
     </article>`).join("");
   $$("#film-stage img").forEach((img) => img.addEventListener("error", () => { img.src = fallbackImage("Ảnh kỷ niệm đang được chuẩn bị"); }, { once: true }));
@@ -273,7 +272,6 @@ function setupFilm() {
     button.setAttribute("aria-label", open ? "Ẩn lời nhắn của ảnh" : "Hiện lời nhắn ẩn của ảnh");
     if (open) popHeart(button.getBoundingClientRect().left + 40, button.getBoundingClientRect().top + 60);
   }));
-  $$(".viewer-open").forEach((button) => button.addEventListener("click", () => openViewer(Number(button.dataset.index))));
 }
 
 function setupScrapbook() {
@@ -315,6 +313,7 @@ let clearConfettiTimer;
 function setCakeState(nextState, fromMic = false) {
   const cake = $("#cake");
   const section = $("#banh-kem");
+  const microphoneButton = $("#mic-button");
   cakeState = nextState;
   cake.classList.remove("is-bouncing", "is-smoking");
   void cake.offsetWidth;
@@ -326,12 +325,15 @@ function setCakeState(nextState, fromMic = false) {
     const message = nextState === 1 ? birthdayData.cakeMessages.lit : birthdayData.cakeMessages.relight;
     $("#cake-message").textContent = message;
     cake.setAttribute("aria-label", `${message} Chạm để thổi tắt nến.`);
+    microphoneButton.hidden = microphoneButton.dataset.available !== "true";
   } else {
     cake.classList.remove("is-lit");
     cake.classList.add("is-smoking");
     section.classList.remove("is-warm");
     fireworksActive = false;
     clearConfetti();
+    microphoneButton.hidden = true;
+    launchBlowoutCelebration();
     $("#cake-message").textContent = birthdayData.cakeMessages.blownOut;
     cake.setAttribute("aria-label", `${birthdayData.cakeMessages.blownOut} Chạm để thắp nến lại.`);
     if (fromMic) $("#mic-status").textContent = "Anh nghe thấy rồi — nến đã tắt!";
@@ -365,6 +367,17 @@ function launchCelebration() {
   clearConfettiTimer = setTimeout(clearConfetti, 5500);
 }
 
+function launchBlowoutCelebration() {
+  launchCelebration();
+  if (reducedMotion) return;
+  const canvas = $("#fireworks");
+  [
+    [canvas.clientWidth * .25, canvas.clientHeight * .32],
+    [canvas.clientWidth * .5, canvas.clientHeight * .22],
+    [canvas.clientWidth * .75, canvas.clientHeight * .34],
+  ].forEach(([x, y]) => launchFirework(x, y, true));
+}
+
 function clearConfetti() {
   $$(".confetti").forEach((piece) => piece.remove());
 }
@@ -382,13 +395,16 @@ function setupMicrophone() {
   const status = $("#mic-status");
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
   if (!navigator.mediaDevices?.getUserMedia || !AudioContextClass) {
+    button.dataset.available = "false";
+    button.hidden = true;
     button.disabled = true;
     status.textContent = "Thiết bị này chưa hỗ trợ thổi nến bằng micro. Em vẫn có thể chạm vào bánh nhé.";
     return;
   }
+  button.dataset.available = "true";
+  button.hidden = cakeState !== 1 && cakeState !== 3;
   button.disabled = false;
   button.addEventListener("click", async () => {
-    if (cakeState !== 1 && cakeState !== 3) setCakeState(cakeState === 0 ? 1 : 3);
     button.disabled = true;
     status.textContent = "Đang chờ em cho phép dùng micro…";
     try {
@@ -557,30 +573,6 @@ function answerQuiz(answer) {
   }, 1500);
 }
 
-let viewerIndex = 0;
-let viewerTouchX = 0;
-function openViewer(index) {
-  viewerIndex = (index + birthdayData.memories.length) % birthdayData.memories.length;
-  const memory = birthdayData.memories[viewerIndex];
-  setImage($("#viewer-image"), memory.image, memory.alt);
-  $("#viewer-caption").textContent = `${memory.title} — ${memory.date}`;
-  const dialog = $("#photo-viewer");
-  if (!dialog.open) dialog.showModal();
-}
-
-function setupViewer() {
-  const dialog = $("#photo-viewer");
-  $("#viewer-close").addEventListener("click", () => dialog.close());
-  $("#viewer-prev").addEventListener("click", () => openViewer(viewerIndex - 1));
-  $("#viewer-next").addEventListener("click", () => openViewer(viewerIndex + 1));
-  dialog.addEventListener("click", (event) => { if (event.target === dialog) dialog.close(); });
-  dialog.addEventListener("pointerdown", (event) => { viewerTouchX = event.clientX; });
-  dialog.addEventListener("pointerup", (event) => {
-    const distance = event.clientX - viewerTouchX;
-    if (Math.abs(distance) > 55) openViewer(viewerIndex + (distance < 0 ? 1 : -1));
-  });
-}
-
 function setupFinalGift() {
   const button = $("#final-gift-button");
   button.addEventListener("click", () => {
@@ -613,5 +605,4 @@ setupLetter();
 setupCake();
 setupWishes();
 setupQuiz();
-setupViewer();
 setupFinalGift();
